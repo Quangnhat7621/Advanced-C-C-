@@ -19,7 +19,7 @@ void QueueInit(Queue *queue)
     queue->rear = -1;
 }
 
-// : This operation indicates whether the queue is empty or not.
+// This operation indicates whether the queue is empty or not.
 bool isEmpty(Queue queue)
 {
     if(
@@ -36,7 +36,7 @@ bool isEmpty(Queue queue)
     }
 }
 
-// : This operation indicates whether the queue is full or not.
+// This operation indicates whether the queue is full or not.
 bool isFull(Queue queue)
 {
     if((queue.rear == -1) && (queue.front == size - 1))         // the queue is full when rear = front = size -1
@@ -49,20 +49,20 @@ bool isFull(Queue queue)
     }
 }
 
-// : This operation returns the element at the front end without removing it.
+// This operation returns the element at the front end without removing it.
 uint8_t front(Queue *queue)
 {
     return queue->arr[queue->front];
 }
 
-// : This operation returns the element at the rear end without removing it.
+// This operation returns the element at the rear end without removing it.
 uint8_t rear(Queue *queue)
 {
     return queue->arr[queue->rear];
 }
 
 
-//: This operation returns the size of the queue i.e. the total number of elements it contains.  
+//This operation returns the size of the queue i.e. the total number of elements it contains.  
 uint8_t Queue_size(Queue queue)
 {
     return (queue.front - queue.rear);
@@ -83,7 +83,7 @@ void enqueu(Queue *queue, uint8_t value)
     
 }
 
-// : This operation removes and returns an element that is at the front end of the queue.
+// This operation removes and returns an element that is at the front end of the queue.
 uint8_t dequeue(Queue *queue)
 {
     if(isEmpty(*queue))
