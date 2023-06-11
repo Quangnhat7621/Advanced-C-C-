@@ -1,7 +1,7 @@
 // coder: Tran Quang Nhat
 // completed time 11:22 pm
 // date: 06/11/2023
-// duration: 2 hours 
+// duration: 1 hour
 
 #include <stdio.h>
 #include <stdint.h>
