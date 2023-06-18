@@ -6,12 +6,16 @@ extended C/C++ knowledge
 
 # BAI2_MACRO
 
+'''
+
     #define max 10;         -> nomatter where max located, the compiler will replace it by 10
 
     #ifndef MAX             -> if the MAX is not defined, the content(statement1, statement2) between #ifndef and #endif will execute 
     statement1;
     statement2;
     #endif
+
+'''
 
 Incontrast to ifndef we have ifdef
 
