@@ -45,6 +45,9 @@ statement2;
 
 ## Creating a new variable using macro
 
+> "\" used for Line break and the last one don't use
+> "##" use two "##" to connect two string
+
 ```php
 #define variable(type, name) type name          // create a new variable  by macro
 
@@ -108,12 +111,14 @@ int main()
 
 ![stack operating](https://cdn.buttercms.com/PuR6MmOQQdqAP6xfh6JO)
 
+> stack is a LIFO(last in first out)
+
 ```php
 #include<stdio.h>
 #include<stdint.h>
 #include<stdbool.h> 
 
-// stack is a LIFO(last in first out)
+
 
 uint8_t size;                       // declare size as the length of stack
 int8_t _index = -1;                 // declare and initialize value for _index 
@@ -226,13 +231,13 @@ int main()
 
 # bai14_CLASS
 
-Object only can access to the propterty and method in the public in its class
+> Object only can access to the propterty and method in the public in its class
 
-the method can access to the content in private and protected in its class
+> the method can access to the content in private and protected in its class
 
-Instead of Define the function inside class, we can declare a header inside class and write the conten outside 
+> Instead of Define the function inside class, we can declare a header inside class and write the conten outside 
 
-We use "::" to access the method inside class
+> We use "::" to access the method inside class
 ### Example
 
 ```php
