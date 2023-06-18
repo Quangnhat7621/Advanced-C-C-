@@ -106,6 +106,8 @@ int main()
 
 # bai11_STACK
 
+![stack operating](https://cdn.buttercms.com/PuR6MmOQQdqAP6xfh6JO)
+
 ```php
 #include<stdio.h>
 #include<stdint.h>
