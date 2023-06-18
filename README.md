@@ -6,7 +6,7 @@ extended C/C++ knowledge
 
 # BAI2_MACRO
 
-'''
+```
 
     #define max 10;         -> nomatter where max located, the compiler will replace it by 10
 
@@ -15,7 +15,7 @@ extended C/C++ knowledge
     statement2;
     #endif
 
-'''
+```
 
 Incontrast to ifndef we have ifdef
 
