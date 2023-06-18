@@ -6,20 +6,22 @@ extended C/C++ knowledge
 
 # BAI2_MACRO
 
+```php
+
+#define max 10;         -> nomatter where max located, the compiler will replace it by 10
+
+#ifndef MAX             -> if the MAX is not defined, the content(statement1, statement2) between #ifndef and #endif will execute 
+statement1;
+statement2;
+#endif
+
 ```
 
-    #define max 10;         -> nomatter where max located, the compiler will replace it by 10
+> Incontrast to ifndef we have ifdef
 
-    #ifndef MAX             -> if the MAX is not defined, the content(statement1, statement2) between #ifndef and #endif will execute 
-    statement1;
-    statement2;
-    #endif
+## Conditional macro
 
-```
-
-Incontrast to ifndef we have ifdef
-
------------------------------------------------------Conditional macro
+```php
 
     #if MAX > 20                      -> if MAX > 20 then  "void display() {printf("MAX > 20\n"); }" is defined
     void display()
@@ -39,64 +41,72 @@ Incontrast to ifndef we have ifdef
 
     #endif
 
-------------------------------------------------Creating a new variable using macro
+```
 
-    #define variable(type, name) type name          // create a new variable  by macro
+## Creating a new variable using macro
 
-    #define variable1(name) int name                // effective as above but the type of data is define in macro
+```php
+#define variable(type, name) type name          // create a new variable  by macro
+
+#define variable1(name) int name                // effective as above but the type of data is define in macro
 
 
 // the code below is also use for creating new variables but it create more than one variable
-    #define variable2(name) int int##name;      \   
-    char char##name;    \
-    double double##name; 
+#define variable2(name) int int##name;      \   
+char char##name;    \
+double double##name; 
 // "\" used for Line break and the last one don't use
 // "##" use two "##" to connect two string
 
 
-    int main()
-    {
-        variable(int, a);                           // when "runing variable(int, a)" the compiler will replace "variable(int, a)"" by "int a;"
-        variable1(b);
-        variable2(c);
-        b = 10;
-        a = 5;
-        charc = 'A';
-        printf("value: %d\n", b);
-        printf("value: %d\n", a);
-        printf("value: %c\n", charc);
+int main()
+{
+    variable(int, a);                    // when "runing variable(int, a)" the compiler will replace "variable(int, a)"" by "int a;"
+    variable1(b);
+    variable2(c);
+    b = 10;
+    a = 5;
+    charc = 'A';
+    printf("value: %d\n", b);
+    printf("value: %d\n", a);
+    printf("value: %c\n", charc);
 
-    }
+}
+```
 
--------------------------------------------------------Creating a function using macro
-    #define Display(functionName, name, age, class)             \
-    void functionName()                                         \
-    {                                                           \
-        printf("student name: %s\n", #name);                    \
-        printf("age: %d\n", age);                               \
-        printf("class: %s\n", #class);                          \
-    }
-    // using "#" to inform that "#name" is a string
+## Creating a function using macro
 
-    Display(hsA, Tran Quang Nhat, 22, 20);
-    int main()
-    {
-        hsA();
-    }
+```php
+#define Display(functionName, name, age, class)             \
+void functionName()                                         \
+{                                                           \
+    printf("student name: %s\n", #name);                    \
+    printf("age: %d\n", age);                               \
+    printf("class: %s\n", #class);                          \
+}
+// using "#" to inform that "#name" is a string
 
---------------------------------------------------------Unidentified_ipnutParameters
+Display(hsA, Tran Quang Nhat, 22, 20);
+int main()
+{
+    hsA();
+}
+```
+## Unidentified_ipnutParameters
 
+```php
+#define test(...) __VA_ARGS__                   // __VA_ARGS__ will replaced by anything filled in  "..."
 
-    #define test(...) __VA_ARGS__                   // __VA_ARGS__ will replaced by anything filled in  "..."
+int main()
+{
+   test(int a = 10; int b = 20; int c = 5);    
+    printf("a: %d \t b:%d\t c:%d\n", a, b, c);
+}
+```
 
-    int main()
-    {
-        test(int a = 10; int b = 20; int c = 5);    
-        printf("a: %d \t b:%d\t c:%d\n", a, b, c);
-    }
+# bai11_STACK
 
-*****************************************************bai11_STACK
-
+```php
 #include<stdio.h>
 #include<stdint.h>
 #include<stdbool.h> 
@@ -210,8 +220,9 @@ int main()
     push(stack, 5);
     printf("size of stack:%d\n", stackSize());
 }
+```
 
-********************************************************bai14_CLASS
+# bai14_CLASS
 
 Object only can access to the propterty and method in the public in its class
 
@@ -220,7 +231,9 @@ the method can access to the content in private and protected in its class
 Instead of Define the function inside class, we can declare a header inside class and write the conten outside 
 
 We use "::" to access the method inside class
-------------Example
+### Example
+
+```php
     class sinhVien{
         public:
             void enterData(string _name, int _className, int _age);
@@ -247,16 +260,16 @@ We use "::" to access the method inside class
         cout<<"student age: "<<age<< endl;
         cout<<"class name: "<<className<<endl;
     }
+```
+
+## KETHUA(INHERITANCE)
 
 
------------------------------------------------------------------KETHUA(INHERITANCE)
+> lop con co the truy cap den protected va public trong lop cha
+> khi chi muon cho lop con sua doi thong tin cua lop cha, nhung khong muon cho doi tuong truy cap thi su dung public
 
 
-// lop con co the truy cap den protected va public trong lop cha
-// khi chi muon cho lop con sua doi thong tin cua lop cha, nhung khong muon cho doi tuong truy cap thi su dung public
-
-
-
+```php
     class doiTuong{
         public:
             string ten;
@@ -318,3 +331,5 @@ We use "::" to access the method inside class
         
 
     }
+
+```
