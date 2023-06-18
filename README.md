@@ -4,7 +4,7 @@ extended C/C++ knowledge
 
 "->" refer  to instructions
 
-#BAI2_MACRO
+# BAI2_MACRO
 
     #define max 10;         -> nomatter where max located, the compiler will replace it by 10
 
