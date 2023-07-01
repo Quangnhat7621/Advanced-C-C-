@@ -2,6 +2,7 @@
 #include<stdint.h>
 #include<stdbool.h>
 
+
 #define size 5
 
 
@@ -98,6 +99,7 @@ uint8_t dequeue(Queue *queue)
         {
             queue->arr[queue->front - i] = queue->arr[queue->front - i - 1];    // arr[n] = arr[n - 1]
         }
+        
         queue->arr[0] = '\0';   // after shifting value, assign the '\0' into the firt element of the queue
         return temp;
     }
@@ -123,6 +125,7 @@ int main()
     // add first element
     enqueu(&queue, 1);
     printf("front: %d\n", queue.front);
+
 
     // add second element
     enqueu(&queue, 2);
