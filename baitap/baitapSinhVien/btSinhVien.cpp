@@ -2,13 +2,14 @@
 #include <string>
 #include <list>
 
+
 using namespace std;
 
 typedef enum
 {
     MALE,
     FEMALE
-}TypeSex;
+} TypeSex;
 
 typedef enum
 {
@@ -16,46 +17,46 @@ typedef enum
     GOOD,
     FAIR,
     POOR
-}TypeRank;
+} TypeRank;
 
 class SinhVien
 {
-    private:
-        uint8_t ID;
-        string NAME;
-        TypeSex SEX;
-        uint8_t AGE;
-        float MATH;
-        float PHYSIC;
-        float CHEMISTRY;
-        float AVERAGE; 
-        TypeRank RANK;
-    
-    public:
-        SinhVien(string name, TypeSex sex, uint8_t age, float math, float physic, float chemistry);
-        uint8_t getID();
-        string getName();
-        TypeSex getSex();
-        uint8_t getAge();
-        float getMath();
-        float getPhysic();
-        float getChemistry();
-        float getAverage();
-        TypeRank getRank();
+private:
+    int ID;
+    string NAME;
+    TypeSex SEX;
+    int AGE;
+    float MATH;
+    float PHYSIC;
+    float CHEMISTRY;
+    float AVERAGE;
+    TypeRank RANK;
 
-        void changeName(string name);
-        void changeSex(TypeSex sex);
-        void changeAge(uint8_t age);
-        void changeMath(float math);
-        void changePhysic(float physic);
-        void changeChemistry(float chemistry);
+public:
+    SinhVien(string name, TypeSex sex, int age, float math, float physic, float chemistry);
+    uint8_t getID();
+    string getName();
+    TypeSex getSex();
+    int getAge();
+    float getMath();
+    float getPhysic();
+    float getChemistry();
+    float getAverage();
+    TypeRank getRank();
 
+    void changeName();
+    void changeSex();
+    void changeAge();
+    void changeMath();
+    void changePhysic();
+    void changeChemistry();
 
+    void information();
 };
 
-SinhVien::SinhVien(string name, TypeSex sex, uint8_t age, float math, float physic, float chemistry)
+SinhVien::SinhVien(string name, TypeSex sex, int age, float math, float physic, float chemistry)
 {
-    static uint8_t id = 0;
+    static int id = 0;
     ID = id;
     id++;
     NAME = name;
@@ -81,7 +82,7 @@ TypeSex SinhVien::getSex()
     return SEX;
 }
 
-uint8_t SinhVien::getAge()
+int SinhVien::getAge()
 {
     return AGE;
 }
@@ -103,21 +104,21 @@ float SinhVien::getChemistry()
 
 float SinhVien::getAverage()
 {
-    AVERAGE = (MATH + PHYSIC + CHEMISTRY)/3;
+    AVERAGE = (MATH + PHYSIC + CHEMISTRY) / 3;
     return AVERAGE;
 }
 
 TypeRank SinhVien::getRank()
 {
-    if(AVERAGE >= 8)
+    if (AVERAGE >= 8)
     {
         RANK = EXCELLENT;
     }
-    else if(AVERAGE >= 6.5)
+    else if (AVERAGE >= 6.5)
     {
         RANK = GOOD;
     }
-    else if(AVERAGE >= 5)
+    else if (AVERAGE >= 5)
     {
         RANK = FAIR;
     }
@@ -128,64 +129,136 @@ TypeRank SinhVien::getRank()
     return RANK;
 }
 
-void SinhVien::changeName(string name)
+void SinhVien::changeName()
 {
-    NAME = name;
+    string name;
+    cout<<"enter name: ";
+    cin>>name;
+    SinhVien::NAME = name;
 }
 
-void SinhVien::changeSex(TypeSex sex)
+void SinhVien::changeSex()
 {
+    TypeSex sex;
+    int number;
+    cout << "Enter sex:\t 1:MALE \t 0:FEMALE";
+    cin >> number;
+    if (number == 1)
+    {
+        sex = MALE;
+    }
+    else
+    {
+        sex = FEMALE;
+    }
     SEX = sex;
 }
 
-void SinhVien::changeAge(uint8_t age)
+void SinhVien::changeAge()
 {
+    int age;
+    cout<<"enter age: ";
+    cin>>age;
     AGE = age;
 }
 
-void SinhVien::changeMath(float math)
+void SinhVien::changeMath()
 {
+    float math;
+    cout<<"enter math grade: ";
+    cin>>math;
     MATH = math;
 }
 
-void SinhVien::changePhysic(float physic)
+void SinhVien::changePhysic()
 {
+    float physic;
+    cout<<"enter physic grade: ";
+    cin>>physic;
     PHYSIC = physic;
 }
 
-void SinhVien::changeChemistry(float chemistry)
+void SinhVien::changeChemistry()
 {
+    float chemistry;
+    cout<<"enter chemistry grade: ";
+    cin>>chemistry;
     CHEMISTRY = chemistry;
+}
+
+void SinhVien::information()
+{
+    cout<<"-------------------------------------------------------------"<<endl;
+    cout << "ID: " << (int)ID << endl;
+    cout << "name: " << NAME << endl;
+    cout << "sex: " << SEX << endl;
+    cout << "age: " << AGE << endl;
+    cout << "math: " << MATH << endl;
+    cout << "physic: " << PHYSIC << endl;
+    cout << "chemsistry: " << CHEMISTRY << endl;
 }
 
 class Menu
 {
-    private:
-        list<SinhVien> Database;
-    public: 
-        void addStudent();
-        void changeStudent();
+private:
+    list<SinhVien> Database;
 
+public:
+    Menu();
+    void addStudent();
+    void changeStudentInformation();
+    void deleteStudentByID();
+    void displayList();
 };
+
+// Menu::Menu()
+// {   int options;
+//     cout<<"choose options!"<<endl;
+//     cout<<"press 0 to add a new student"<<endl;
+//     cout<<"press 1 to update student's information by ID"<<endl;
+//     cout<<"press 2 to delete student by ID"<<endl;
+//     cout<<"press 3 to find student by name"<<endl;
+//     cout<<"press 4 to sort students by GPA"<<endl;
+//     cout<<"press 5 to sort students by name"<<endl;
+//     cout<<"press 6 to display students list"<<endl;
+//     cout<<"press 7 to write students list into student.txt file"<<endl;
+//     cout<<"enter options: ";
+//     cin>>options;
+//     switch (options)
+//     {
+//     case 0:
+//         addStudent();
+//         break;
+//     case 1:
+//         changeStudentInformation();
+//         break;
+//     case 2:
+//         deleteStudentByID();
+//     case 6:
+//         displayList();
+//     }
+// }
 
 void Menu::addStudent()
 {
     string name;
     TypeSex sex;
-    uint8_t age;
+    int age;
     float math;
     float physic;
     float chemistry;
 
-    cout<<"Enter new student"<<endl;
+    int number;
+
+    cout << "Enter new student" << endl;
     do
     {
-        cout<<" Enter student name:";
-        cin>>name;
-        cout<<"Enter sex:\t 1:MALE \t 0:FEMALE";
-        uint8_t number;
-        cin>>number;
-        if(number == 1)
+        cout << " Enter student name:";
+        cin >> name;
+        cout << "Enter sex:\t 1:MALE \t 0:FEMALE";
+
+        cin >> number;
+        if (number == 1)
         {
             sex = MALE;
         }
@@ -193,31 +266,131 @@ void Menu::addStudent()
         {
             sex = FEMALE;
         }
-        cout<<"Enter age:";
-        cin>>age;
-        cout<<"enter math";
-        cin>>math;
-        cout<<"Enter physic:";
-        cin>>math;
-        cout<<"Enter chemistry";
-        cin>>chemistry;
-    }
-    while
-    (
+        cout << "Enter age:";
+        cin >> age;
+        cout << "enter math";
+        cin >> math;
+        cout << "Enter physic:";
+        cin >> physic;
+        cout << "Enter chemistry";
+        cin >> chemistry;
+        cout << "number: " << number << endl;
+    } while (
         !(
-            (math >= 0 && math <= 10) && 
-            (physic >= 0 && physic <= 10) && 
-            (chemistry >= 0 && chemistry <= 10) && 
-            (age > 0 && age < 100)
-        )
-    );
-
+            (math >= 0 && math <= 10) &&
+            (physic >= 0 && physic <= 10) &&
+            (chemistry >= 0 && chemistry <= 10) &&
+            (age > 0 && age < 100) &&
+            (number == 1 || number == 0)
+                ));
+    if (number == 1)
+    {
+        cout << "male" << endl;
+    }
+    else
+    {
+        cout << "female" << endl;
+    }
     SinhVien sv(name, sex, age, math, physic, chemistry);
     Database.push_back(sv);
+}
+void Menu::displayList()
+{
+    for (SinhVien item : Database)
+    {
+        item.information();
+    }
+}
+
+void Menu::changeStudentInformation()
+{
+    int ID;
+    cout<<"change student information"<<endl;
+    cout<<"enter student ID that you want to change: ";
+    cin>>ID;
+    for(SinhVien &item : Database)
+    {
+        if(item.getID() == ID)
+        {
+
+            cout<<"entered ID"<<endl;
+            cout<<"choose options:"<<endl;
+            cout<<"press 0 to change name."<<endl;
+            cout<<"press 1 to change sex."<<endl;
+            cout<<"press 2 to change age."<<endl;
+            cout<<"press 3 to change math grade"<<endl;
+            cout<<"press 4 to change physic grade"<<endl;
+            cout<<"press 5 to change chemistry grade"<<endl;
+            cout<<"press 6 to choose all options"<<endl;
+
+            cout<<"enter options:";
+            int options;
+            cin>>options;
+            switch (options)
+            {
+            case 0:
+                item.changeName();
+                break;
+            case 1:
+                item.changeSex();
+                break;
+            case 2:
+                item.changeAge();
+                break;
+            case 3:
+                item.changeMath();
+                break;
+            case 4:
+                item.changePhysic();
+                break;;
+            case 5:
+                item.changeChemistry();
+                break;
+            default:
+                item.changeName();
+                item.changeSex();
+                item.changeAge();
+                item.changeMath();
+                item.changePhysic();
+                item.changeChemistry();
+                break;
+            }
+            
+        }
+    
+    }
+    cout<<"there is no suitable ID"<<endl;
+}
+
+void Menu::deleteStudentByID()
+{
+    int ID;
+    cout<<"enter student ID that will be deleted: ";
+    cin>>ID;
+    auto position = Database.begin();
+    for(SinhVien &item: Database)
+    {
+        
+        if(item.getID() == ID)
+        {
+            Database.erase(position);
+            break;
+        }
+        position++;
+    }
 
 }
 
 int main()
 {
-    return 0;
+    Menu menu1;
+    // menu1.addStudent();
+    // menu1.addStudent();
+    // menu1.addStudent();
+    // menu1.displayList();
+    // // menu1.changeStudentInformation();
+
+    // menu1.deleteStudentByID();
+    // menu1.displayList();
+    // return 0;
 }
