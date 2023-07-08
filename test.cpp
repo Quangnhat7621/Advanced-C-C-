@@ -8,6 +8,8 @@ int main()
 {
     cout<<"enter number"<<endl;
     cin>>number;
+
+    cout<<"print number: "<<number<<endl;
     if (number == 1)
     {
         cout<<"so 1"<<endl;

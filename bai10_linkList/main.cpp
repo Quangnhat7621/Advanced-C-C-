@@ -1,6 +1,10 @@
-#include<stdio.h>
+
 #include<stdint.h>
 #include<stdlib.h>
+#include <iostream>
+
+using namespace std;
+
 
 struct node
 {
@@ -18,17 +22,17 @@ node *createNode(uint8_t value)
     return Node;
 }
 
-void pushPack(node **arr, uint8_t value)
+void pushPack(node *arr, uint8_t value)
 {
     node *temp, *p;
     temp = createNode(value);
-    if(*arr == NULL)
+    if(arr == NULL)
     {
-        *arr = temp;
+        arr = temp;
     }
     else
     {
-        p = *arr;
+        p = arr;
         while (p->next != NULL)
         {
             p = p->next;
@@ -41,8 +45,8 @@ void pushPack(node **arr, uint8_t value)
 int main()
 {
     node *arr = NULL;
-    printf("diachi: %p\n", arr);
-    pushPack(&arr, 3);
-    pushPack(&arr, 4);
-    pushPack(&arr, 10);
+    pushPack(arr, 3);
+    pushPack(arr, 4);
+    cout<<"done";
+    return 0;
 }

@@ -49,7 +49,7 @@ bool findNumber(uint8_t _left, uint8_t _right , uint8_t arr[], uint8_t inputNumb
 {
     
     uint8_t centerPoint = _left + (_right - _left) / 2;     //  find mid index in array
-    if((_right - _left) < 5)        // if the range is smaller than 5, we will find the number in range
+    if((_right - _left) < 2)        // if the range is smaller than 5, we will find the number in range
     {
         for(uint8_t i = 0; i < (_right - _left) + 1; i++)
         {

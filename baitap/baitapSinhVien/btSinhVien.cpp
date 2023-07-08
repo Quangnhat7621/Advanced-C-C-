@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <stdbool.h>
 
 
 using namespace std;
@@ -21,37 +22,37 @@ typedef enum
 
 class SinhVien
 {
-private:
-    int ID;
-    string NAME;
-    TypeSex SEX;
-    int AGE;
-    float MATH;
-    float PHYSIC;
-    float CHEMISTRY;
-    float AVERAGE;
-    TypeRank RANK;
+    private:
+        int ID;
+        string NAME;
+        TypeSex SEX;
+        int AGE;
+        float MATH;
+        float PHYSIC;
+        float CHEMISTRY;
+        float AVERAGE;
+        TypeRank RANK;
 
-public:
-    SinhVien(string name, TypeSex sex, int age, float math, float physic, float chemistry);
-    uint8_t getID();
-    string getName();
-    TypeSex getSex();
-    int getAge();
-    float getMath();
-    float getPhysic();
-    float getChemistry();
-    float getAverage();
-    TypeRank getRank();
+    public:
+        SinhVien(string name, TypeSex sex, int age, float math, float physic, float chemistry);
+        uint8_t getID();
+        string getName();
+        TypeSex getSex();
+        int getAge();
+        float getMath();
+        float getPhysic();
+        float getChemistry();
+        float getAverage();
+        TypeRank getRank();
 
-    void changeName();
-    void changeSex();
-    void changeAge();
-    void changeMath();
-    void changePhysic();
-    void changeChemistry();
+        void changeName();
+        void changeSex();
+        void changeAge();
+        void changeMath();
+        void changePhysic();
+        void changeChemistry();
 
-    void information();
+        void information();
 };
 
 SinhVien::SinhVien(string name, TypeSex sex, int age, float math, float physic, float chemistry)
@@ -204,11 +205,15 @@ private:
     list<SinhVien> Database;
 
 public:
-    Menu();
+    // Menu();
     void addStudent();
     void changeStudentInformation();
     void deleteStudentByID();
+    void findStudentByName();
+    void sortStudentByGPA();
+    void sortStudentByName();
     void displayList();
+
 };
 
 // Menu::Menu()
@@ -364,11 +369,12 @@ void Menu::changeStudentInformation()
 
 void Menu::deleteStudentByID()
 {
+
     int ID;
     cout<<"enter student ID that will be deleted: ";
     cin>>ID;
     auto position = Database.begin();
-    for(SinhVien &item: Database)
+    for(SinhVien item: Database)
     {
         
         if(item.getID() == ID)
@@ -378,19 +384,68 @@ void Menu::deleteStudentByID()
         }
         position++;
     }
+}
+
+void Menu::findStudentByName()
+{
+    bool state = false;
+    string name;
+    cout<<"Enter student name to find: ";
+    cin>>name;
+    for(SinhVien item : Database)
+    {
+        if(item.getName() == name)
+        {
+            item.information();
+            state = true;
+            break;
+        }
+    }
+    if(state == false)
+    {
+        cout<<"incorrect name input"<<endl;
+    }
+    
+}
+
+
+
+void Menu::sortStudentByGPA()
+{
+    for(auto first_position = Database.begin(); first_position != Database.end(); first_position++)
+    {
+        auto firstNode = first_position;
+        auto secondNode = first_position++;
+        if(firstNode == Database.end())
+        {
+            break;
+        }
+        for(auto second_position = secondNode; second_position != Database.end(); second_position++)
+        {
+            if(first_position->getAverage() < second_position->getAverage())
+            {
+                swap(*first_position, *second_position);
+            }
+        }
+
+    }
 
 }
+
 
 int main()
 {
     Menu menu1;
-    // menu1.addStudent();
-    // menu1.addStudent();
-    // menu1.addStudent();
-    // menu1.displayList();
+    menu1.addStudent();
+    menu1.addStudent();
+    menu1.addStudent();
+    menu1.displayList();
     // // menu1.changeStudentInformation();
 
+    // menu1.findStudentByName();
+
+    menu1.sortStudentByGPA();
     // menu1.deleteStudentByID();
-    // menu1.displayList();
-    // return 0;
+    menu1.displayList();
+    return 0;
 }
