@@ -38,6 +38,47 @@ void pushPack(node **arr, uint8_t value)
     }
 }
 
+typedef struct
+{
+    int value;
+    struct CenterPoint *left;
+    struct CenterPoint *right;
+}CenterPoint;
+
+CenterPoint *buildTree(node *head, int start, int end)
+{
+    if(head == NULL && start > end)
+    {
+        return NULL;
+    }
+
+    int mid = (end + start)/2;
+    node *Node = head;
+    for (int i = start; i < mid; i++)
+    {
+        if (Node->next == NULL)
+        {
+            break;
+        }
+        Node = Node->next;
+        
+    }
+
+    CenterPoint *root = (CenterPoint *)malloc(sizeof(CenterPoint));
+    
+};
+
+CenterPoint *centerPoint(node *head)
+{
+    int length = 0;
+    node *Node = head;
+    while (Node != NULL)
+    {
+        Node = Node->next;
+        length++;
+    }
+    
+}
 int main()
 {
     node *arr = NULL;
@@ -45,4 +86,5 @@ int main()
     pushPack(&arr, 3);
     pushPack(&arr, 4);
     pushPack(&arr, 10);
+    pushPack(&arr, 123);
 }

@@ -591,3 +591,89 @@ int main()
 }
 
 ```
+
+#Bai 18 destructor
+> Destructor se duoc goi khi ket thuc 1 ham, va destructor cua doi tuong cuoi cung se duoc goi truoc
+
+```php
+#include <iostream>
+#include <string>
+using namespace std;
+
+class SinhVien
+{
+    private:
+        int ID;
+        int *ptr = nullptr;
+        string name;
+    public:
+        SinhVien()
+        {
+            static int id;
+            ptr = &id;
+            ID = id;
+            id++;
+        }
+        ~SinhVien()
+        {
+            *ptr = 0;
+            name  = "sinh vien: ";
+            name.push_back(ID + 48);
+            cout<<"destructor duoc goi \t";
+            cout<<name<<endl;
+        }
+        void inThongTin()
+        {
+            cout<<"ID: "<<this->ID<<endl;
+        }
+
+};
+
+void test1()
+{
+    SinhVien sv1, sv2, sv3;
+    sv1.inThongTin();
+    sv2.inThongTin();
+    sv3.inThongTin();
+}
+
+int main()
+{
+    test1();
+    // sau khi khoi tao xong 3 doi tuong, tuc la ham test da chay xong thi destructor se duoc goi, destructor cua sv3 se dc goi truoc
+    // tiep theo la sv2 va sv1. 
+    SinhVien sv4;   // id cua sv 4 = 0, chu ko tang len boi vi cac id trc da duoc reset khi ham destructor duoc goi
+    sv4.inThongTin();
+
+    return 0;
+}
+```
+
+# tham trị và tham chieu
+> tham trị là tạo ra các bộ nhớ đệm(tốn thêm bộ nhớ) để tính toán các giá trị được đưa vào
+> tham chiếu là chỉ tới trực tiếp biến gốc đã tạo trước đó để thay đổi giá trị, nên không tốn thêm bộ nhớ.
+```php
+#include <iostream>
+
+using namespace std;
+
+
+
+void test(int a, int *b, int &c) // int a, int *b là các biến tạm dùng để lưu giá trị, hay còn gọi là tham trị, tốn bộ nhó vì phải lưu dư liệu tạm thời
+                                // còn &c là chỉ trực tiếp đến biến cục bộ đã được khởi tạo ở ngoài, 
+                                //ta có thể sửa giá trị trục tiếp mà không cần qua biến trung gian, nên không tốn thêm bộ nhớ
+{          
+    a = 10, *b = 20, c = 30;
+
+}
+
+int main()
+{
+    int a = 0, b = 0, c = 0;
+    test(a, &b, c);
+    cout<<"a: "<< a << endl;
+    cout<<"b: "<< b << endl;
+    cout<<"c: "<< c << endl;
+    return 0;
+}
+```
