@@ -649,7 +649,7 @@ int main()
 }
 ```
 
-# tham trị và tham chieu
+# bai 18 tham trị và tham chieu
 > tham trị là tạo ra các bộ nhớ đệm(tốn thêm bộ nhớ) để tính toán các giá trị được đưa vào
 > tham chiếu là chỉ tới trực tiếp biến gốc đã tạo trước đó để thay đổi giá trị, nên không tốn thêm bộ nhớ.
 ```php
@@ -675,5 +675,34 @@ int main()
     cout<<"b: "<< b << endl;
     cout<<"c: "<< c << endl;
     return 0;
+}
+```
+
+# bai 19 lambda
+
+>structure:   [captures](parameters)->reuturn type {statements};
+> captures:  là danh sách các biến từ phạm vi bên ngoài mà lambda muốn sử dụng. Đây có thể là các biến cục bộ trong phạm vi gần nhất hoặc biến toàn cục.
+> parameters: là danh sách các tham số của lambda, giống như khi bạn khai báo hàm bình thường.
+
+## example
+```php
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    
+    vector <int> li = {1, 2, 3, 6, 7, 5, 1};
+
+    sort(li.begin(), li.end(), [](int a, int b){
+        return a < b;
+        });
+
+    for(vector<int>::iterator it = li.begin(); it != li.end(); ++it) 
+    {
+        cout<<*it<<endl;
+    }
 }
 ```
