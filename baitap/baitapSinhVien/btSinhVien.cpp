@@ -2,6 +2,7 @@
 #include <string>
 #include <list>
 #include <stdbool.h>
+#include<fstream>
 
 
 using namespace std;
@@ -35,7 +36,7 @@ class SinhVien
 
     public:
         SinhVien(string name, TypeSex sex, int age, float math, float physic, float chemistry);
-        uint8_t getID();
+        int getID();
         string getName();
         TypeSex getSex();
         int getAge();
@@ -68,7 +69,7 @@ SinhVien::SinhVien(string name, TypeSex sex, int age, float math, float physic, 
     CHEMISTRY = chemistry;
 }
 
-uint8_t SinhVien::getID()
+int SinhVien::getID()
 {
     return ID;
 }
@@ -213,6 +214,7 @@ public:
     void sortStudentByGPA();
     void sortStudentByName();
     void displayList();
+    void witeTxtFile();
 
 };
 
@@ -432,20 +434,102 @@ void Menu::sortStudentByGPA()
 
 }
 
+void Menu::sortStudentByName()
+{
+    Database.sort([]( SinhVien a, SinhVien b) {
+        return a.getName() < b.getName();
+    });
+}
+
+void Menu::witeTxtFile()
+{
+    ofstream outputFile("student.txt");
+    if(outputFile.is_open())
+    {
+        outputFile<<"ID"<<"\t"<<"student_name"<<"\t"<<"student_age"<<"\t"<<"math_grade"<<"\t"<<"physic_grade"<<"\t"<<"chemistry_grade"<<endl;
+
+        for(SinhVien student:Database)
+        {
+            outputFile<<student.getID()<<"\t"<<student.getName()<<"\t\t"<<student.getAge()<<"\t\t"<<student.getMath()<<"\t\t"<<student.getPhysic()<<"\t\t"<<student.getChemistry()<<endl;
+        }
+        outputFile.close();
+    }
+}
+
 
 int main()
 {
     Menu menu1;
-    menu1.addStudent();
-    menu1.addStudent();
-    menu1.addStudent();
-    menu1.displayList();
-    // // menu1.changeStudentInformation();
 
+    while(1)
+    {
+        int options;
+        cout<<"choose options!"<<endl;
+        cout<<"press 0 to add a new student"<<endl;
+        cout<<"press 1 to update student's information by ID"<<endl;
+        cout<<"press 2 to delete student by ID"<<endl;
+        cout<<"press 3 to find student by name"<<endl;
+        cout<<"press 4 to sort students by GPA"<<endl;
+        cout<<"press 5 to sort students by name"<<endl;
+        cout<<"press 6 to display students list"<<endl;
+        cout<<"press 7 to write students list into student.txt file"<<endl;
+        cout<<"enter options: ";
+        cin>>options;
+        switch (options)
+        {
+        case 0:
+            menu1.addStudent();
+            break;
+        case 1:
+            menu1.changeStudentInformation();
+            break;
+        case 2:
+            menu1.deleteStudentByID();
+            break;
+        case 3:
+            menu1.findStudentByName();
+            break;
+        case 4: 
+            menu1.sortStudentByGPA();
+            break;
+        case 5:
+            menu1.sortStudentByName();
+            break;
+        case 6:
+            menu1.displayList();
+            break;
+        case 7:
+            menu1.witeTxtFile();
+            break;
+        }
+    }
+
+    // // them sinh vien
+    // menu1.addStudent();
+    // // menu1.addStudent();
+    // // menu1.addStudent();
+    // menu1.displayList();
+    
+    // // 1 cap nhat thong tin sinh vien boi id
+    // menu1.changeStudentInformation();
+
+    // // 2 xoa sinh vien boi id
+    // menu1.deleteStudentByID();
+
+    // // 3 tim kiem sinh vien theo ten
     // menu1.findStudentByName();
 
-    menu1.sortStudentByGPA();
-    // menu1.deleteStudentByID();
-    menu1.displayList();
+    // // 4 sap xep sv theo diem trung binh gpa
+    // menu1.sortStudentByGPA();
+
+    // // 5 sap xep sih vien theo ten
+    // menu1.sortStudentByName();
+    // cout<<"--------------------------------------------------------"<<endl;
+
+    // // 6 in danh sach sinh vien
+    // menu1.displayList();
+
+    // // 7 ghi danh sach sinh vien vao file student.txt
+    // menu1.witeTxtFile();
     return 0;
 }
