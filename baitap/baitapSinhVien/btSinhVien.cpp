@@ -143,15 +143,15 @@ void SinhVien::changeSex()
 {
     TypeSex sex;
     int number;
-    cout << "Enter sex:\t 1:MALE \t 0:FEMALE";
+    cout << "Enter sex:\t 0:MALE \t 1:FEMALE";
     cin >> number;
     if (number == 1)
     {
-        sex = MALE;
+        sex = FEMALE;
     }
     else
     {
-        sex = FEMALE;
+        sex = MALE;
     }
     SEX = sex;
 }
@@ -256,32 +256,34 @@ void Menu::addStudent()
     float chemistry;
 
     int number;
-
+    bool first_fill_in = true;
     cout << "Enter new student" << endl;
     do
     {
+        if(first_fill_in == false)
+        cout<<"Enter student information again!"<<endl;
         cout << " Enter student name:";
         cin >> name;
-        cout << "Enter sex:\t 1:MALE \t 0:FEMALE";
+        cout << "Enter sex:\t 0:MALE \t 1:FEMALE";
 
         cin >> number;
         if (number == 1)
         {
-            sex = MALE;
+            sex = FEMALE;
         }
         else
         {
-            sex = FEMALE;
+            sex = MALE;
         }
         cout << "Enter age:";
         cin >> age;
-        cout << "enter math";
+        cout << "enter math:";
         cin >> math;
         cout << "Enter physic:";
         cin >> physic;
         cout << "Enter chemistry";
         cin >> chemistry;
-        cout << "number: " << number << endl;
+        first_fill_in = false;
     } while (
         !(
             (math >= 0 && math <= 10) &&
@@ -325,14 +327,16 @@ void Menu::changeStudentInformation()
             cout<<"press 0 to change name."<<endl;
             cout<<"press 1 to change sex."<<endl;
             cout<<"press 2 to change age."<<endl;
-            cout<<"press 3 to change math grade"<<endl;
-            cout<<"press 4 to change physic grade"<<endl;
-            cout<<"press 5 to change chemistry grade"<<endl;
-            cout<<"press 6 to choose all options"<<endl;
-
+            cout<<"press 3 to change math grade."<<endl;
+            cout<<"press 4 to change physic grade."<<endl;
+            cout<<"press 5 to change chemistry grade."<<endl;
+            cout<<"press 6 to choose all options."<<endl;
+            cout<<"press other number to back!"<<endl;
+            
             cout<<"enter options:";
             int options;
             cin>>options;
+            cout<<"************************************************************\n"<<endl;
             switch (options)
             {
             case 0:
@@ -349,11 +353,11 @@ void Menu::changeStudentInformation()
                 break;
             case 4:
                 item.changePhysic();
-                break;;
+                break;
             case 5:
                 item.changeChemistry();
                 break;
-            default:
+            case 6:
                 item.changeName();
                 item.changeSex();
                 item.changeAge();
@@ -361,7 +365,11 @@ void Menu::changeStudentInformation()
                 item.changePhysic();
                 item.changeChemistry();
                 break;
+            default:
+                break;
+            
             }
+
             
         }
     
@@ -371,15 +379,14 @@ void Menu::changeStudentInformation()
 
 void Menu::deleteStudentByID()
 {
-
-    int ID;
+    int id;
     cout<<"enter student ID that will be deleted: ";
-    cin>>ID;
+    cin>>id;
     auto position = Database.begin();
     for(SinhVien item: Database)
     {
         
-        if(item.getID() == ID)
+        if(item.getID() == id)
         {
             Database.erase(position);
             break;
@@ -414,23 +421,27 @@ void Menu::findStudentByName()
 
 void Menu::sortStudentByGPA()
 {
-    for(auto first_position = Database.begin(); first_position != Database.end(); first_position++)
-    {
-        auto firstNode = first_position;
-        auto secondNode = first_position++;
-        if(firstNode == Database.end())
-        {
-            break;
-        }
-        for(auto second_position = secondNode; second_position != Database.end(); second_position++)
-        {
-            if(first_position->getAverage() < second_position->getAverage())
-            {
-                swap(*first_position, *second_position);
-            }
-        }
 
-    }
+    Database.sort([](SinhVien a, SinhVien b){return a.getAverage() < b.getAverage();});
+
+    // for(auto first_position = Database.begin(); first_position != Database.end(); first_position++)
+    // {
+    //     auto firstNode = first_position;
+    //     if(firstNode == Database.end())
+    //     {
+    //         break;
+    //     }
+    //     auto secondNode = first_position++;
+        
+    //     for(auto second_position = secondNode; second_position != Database.end(); second_position++)
+    //     {
+    //         if(first_position->getAverage() < second_position->getAverage())
+    //         {
+    //             swap(*first_position, *second_position);
+    //         }
+    //     }
+
+    // }
 
 }
 
@@ -456,14 +467,27 @@ void Menu::witeTxtFile()
     }
 }
 
+typedef enum
+{   
+    ADD_STUDENT,
+    UPDATE_INFORMATION,
+    DELETE_BY_ID,
+    FIND_BY_NAME,
+    SORT_BY_GPA,
+    SORT_BY_NAME,
+    DISPLAY_LIST,
+    WRITE_FILE
+} TypeOptions;
 
 int main()
 {
+
     Menu menu1;
 
     while(1)
     {
         int options;
+        cout<<"*******************************************************"<<endl;
         cout<<"choose options!"<<endl;
         cout<<"press 0 to add a new student"<<endl;
         cout<<"press 1 to update student's information by ID"<<endl;
@@ -473,32 +497,35 @@ int main()
         cout<<"press 5 to sort students by name"<<endl;
         cout<<"press 6 to display students list"<<endl;
         cout<<"press 7 to write students list into student.txt file"<<endl;
+        cout<<"press 8 to finish the program!"<<endl;
         cout<<"enter options: ";
         cin>>options;
+
+        cout<<"***********************************************************\n"<<endl;
         switch (options)
         {
-        case 0:
+        case ADD_STUDENT:
             menu1.addStudent();
             break;
-        case 1:
+        case UPDATE_INFORMATION:
             menu1.changeStudentInformation();
             break;
-        case 2:
+        case DELETE_BY_ID:
             menu1.deleteStudentByID();
             break;
-        case 3:
+        case FIND_BY_NAME:
             menu1.findStudentByName();
             break;
-        case 4: 
+        case SORT_BY_GPA: 
             menu1.sortStudentByGPA();
             break;
-        case 5:
+        case SORT_BY_NAME:
             menu1.sortStudentByName();
             break;
-        case 6:
+        case DISPLAY_LIST:
             menu1.displayList();
             break;
-        case 7:
+        case WRITE_FILE:
             menu1.witeTxtFile();
             break;
         }
