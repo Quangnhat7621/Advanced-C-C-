@@ -424,24 +424,6 @@ void Menu::sortStudentByGPA()
 
     Database.sort([](SinhVien a, SinhVien b){return a.getAverage() < b.getAverage();});
 
-    // for(auto first_position = Database.begin(); first_position != Database.end(); first_position++)
-    // {
-    //     auto firstNode = first_position;
-    //     if(firstNode == Database.end())
-    //     {
-    //         break;
-    //     }
-    //     auto secondNode = first_position++;
-        
-    //     for(auto second_position = secondNode; second_position != Database.end(); second_position++)
-    //     {
-    //         if(first_position->getAverage() < second_position->getAverage())
-    //         {
-    //             swap(*first_position, *second_position);
-    //         }
-    //     }
-
-    // }
 
 }
 
@@ -497,7 +479,6 @@ int main()
         cout<<"press 5 to sort students by name"<<endl;
         cout<<"press 6 to display students list"<<endl;
         cout<<"press 7 to write students list into student.txt file"<<endl;
-        cout<<"press 8 to finish the program!"<<endl;
         cout<<"enter options: ";
         cin>>options;
 
@@ -531,32 +512,5 @@ int main()
         }
     }
 
-    // // them sinh vien
-    // menu1.addStudent();
-    // // menu1.addStudent();
-    // // menu1.addStudent();
-    // menu1.displayList();
-    
-    // // 1 cap nhat thong tin sinh vien boi id
-    // menu1.changeStudentInformation();
-
-    // // 2 xoa sinh vien boi id
-    // menu1.deleteStudentByID();
-
-    // // 3 tim kiem sinh vien theo ten
-    // menu1.findStudentByName();
-
-    // // 4 sap xep sv theo diem trung binh gpa
-    // menu1.sortStudentByGPA();
-
-    // // 5 sap xep sih vien theo ten
-    // menu1.sortStudentByName();
-    // cout<<"--------------------------------------------------------"<<endl;
-
-    // // 6 in danh sach sinh vien
-    // menu1.displayList();
-
-    // // 7 ghi danh sach sinh vien vao file student.txt
-    // menu1.witeTxtFile();
     return 0;
 }
