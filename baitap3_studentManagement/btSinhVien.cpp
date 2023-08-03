@@ -218,33 +218,6 @@ public:
 
 };
 
-// Menu::Menu()
-// {   int options;
-//     cout<<"choose options!"<<endl;
-//     cout<<"press 0 to add a new student"<<endl;
-//     cout<<"press 1 to update student's information by ID"<<endl;
-//     cout<<"press 2 to delete student by ID"<<endl;
-//     cout<<"press 3 to find student by name"<<endl;
-//     cout<<"press 4 to sort students by GPA"<<endl;
-//     cout<<"press 5 to sort students by name"<<endl;
-//     cout<<"press 6 to display students list"<<endl;
-//     cout<<"press 7 to write students list into student.txt file"<<endl;
-//     cout<<"enter options: ";
-//     cin>>options;
-//     switch (options)
-//     {
-//     case 0:
-//         addStudent();
-//         break;
-//     case 1:
-//         changeStudentInformation();
-//         break;
-//     case 2:
-//         deleteStudentByID();
-//     case 6:
-//         displayList();
-//     }
-// }
 
 void Menu::addStudent()
 {
